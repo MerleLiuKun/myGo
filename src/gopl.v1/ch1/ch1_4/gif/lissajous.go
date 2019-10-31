@@ -1,5 +1,5 @@
 // lissajous demo
-package main
+package gif
 
 import (
 	"image"
