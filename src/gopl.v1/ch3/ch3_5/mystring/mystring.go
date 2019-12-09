@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"unicode/utf8"
 )
 
@@ -36,6 +37,8 @@ import (
 	strconv 包提供了布尔型、整数型、浮点数和对应字符串的相互转换，还提供了双引号转义相关的转换。
 
 	unicode 包提供了 IsDigit、IsLetter、IsUpper 和 IsLower 等功能函数，用于给字符分类。
+
+	字符串和数值之间的转换也比较常见。 strconv 提供了这类转换功能。
 
 */
 
@@ -75,6 +78,9 @@ func main() {
 	unicodeHandler()
 	unicodeToRune()
 	unicodeToString()
+
+	numberToString()
+	stringToNumber()
 }
 
 func HasPrefix(s, prefix string) bool {
@@ -136,4 +142,27 @@ func unicodeToString() {
 
 	// 如果对应码点的字符是无效的 则用 \uFFFD 无效字符作为替换
 	fmt.Println(string(123456))
+}
+
+func numberToString() {
+	x := 123
+	y := fmt.Sprintf("%d", x)
+	fmt.Println(y, strconv.Itoa(x))
+
+	// 进制转化
+	fmt.Println(strconv.FormatInt(int64(x), 2))
+
+	s := fmt.Sprintf("x=%b", x)
+	fmt.Println(s)
+}
+
+func stringToNumber() {
+	x, err := strconv.Atoi("123")
+	if err != nil {
+		fmt.Printf("%v", err)
+	}
+	fmt.Println(x)
+
+	y, err := strconv.ParseInt("123", 10, 64)  // 64表示整数大小，int64。 0-> int。
+	fmt.Println(y)
 }
