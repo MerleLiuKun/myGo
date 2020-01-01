@@ -39,7 +39,9 @@ import (
 
 	如果你要测试一个 slice 是否为空，需要使用 len(s) == 0 来判断。
 
-	内建的 make 函数创建一个指定元素类型、长度和容量的 slice。容量部分可以省略，此时容量等于长度
+	内建的 make 函数创建一个指定元素类型、长度和容量的 slice。容量部分可以省略，此时容量等于长度。
+
+	内置的 append 函数用于向 slice 追加元素。
 */
 
 func main() {
@@ -60,6 +62,8 @@ func main() {
 	equNil()
 
 	simpleMake()
+
+	simpleAppend()
 }
 
 func simple() {
@@ -124,4 +128,21 @@ func simpleMake() {
 	fmt.Println(s, len(s), cap(s))
 	s1 := make([]int, 4, 8)
 	fmt.Println(s1, len(s1), cap(s1))
+}
+
+func simpleAppend() {
+	var runes []rune
+
+	for _, r := range "Hello, 世界" {
+		runes = append(runes, r)
+	}
+
+	fmt.Printf("%q\n", runes)
+
+	var x []int
+	x = append(x, 1)
+	x = append(x, 2, 3)
+	x = append(x, 4, 5, 6)
+	x = append(x, x...)  // 追加一个 slice x
+	fmt.Println(x)
 }
